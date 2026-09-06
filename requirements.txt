@@ -1,7 +1,7 @@
-django
+codjango
 gunicorn
 whitenoise
 psycopg2-binary
 requests
-urllib3
+urllib3git 
 python-dotenv

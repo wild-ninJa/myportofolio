@@ -5,20 +5,33 @@
 }
 
 :root {
-    --ink: #1c1917;
-    --paper: #faf6f0;
-    --accent: #d95d39;
-    --accent-dark: #a8442a;
-    --line: #e3d9c9;
-    --text-muted: #6b6459;
-    --radius: 4px;
+    --ink: #fcfafa;
+    --paper: #d2dedf;
+    --accent: #2373ec;
+    --accent-dark: #092547;
+    --line: #717d94;
+    --text-muted: #000000;
+    --radius: 24px;
 }
 
 body {
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink);
-    background-color: var(--paper);
+    background-image: url('../img/sunflower-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-height: 100dvh;
     line-height: 1.6;
+}
+
+
+@media (min-width: 768px) {
+    body {
+        background-attachment: fixed;
+    }
 }
 
 h1, .brand {
@@ -26,22 +39,57 @@ h1, .brand {
 }
 
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto 0;
 }
 
+.page-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 0 0 20px 20px;
+    padding-top: 20px;
+}
 /* Header dengan Flexbox */
 
 .site-header {
-    border-bottom: 1px solid var(--line);
+    background-color: rgba(4, 31, 36, 0.8);
+    /* background: linear-gradient(
+        to bottom,
+        rgba(0,0,0, 0.8),
+        rgba(248, 250, 252, 0.8) 
+    ); */
+    border-radius: 100px 100px 0 0;
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.site-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    border-radius: 100px 100px 0 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 255, 255, 0) 100%
+    );
 }
 
 .site-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    padding: 3rem 1.5rem;
 }
 
 .brand {
@@ -64,9 +112,9 @@ h1, .brand {
 
 /* Section Hero dengan CSS Grid */
 
-.hero {
+/* .hero {
     padding: 4.5rem 0 5rem;
-}
+} */
 
 .hero-grid {
     display: grid;
@@ -75,6 +123,14 @@ h1, .brand {
         "identity photo"
         "details  photo";
     gap: 1.5rem 3rem;
+    background-color: rgba(9, 62, 71, 0.2);
+    backdrop-filter: blur(8px);
+    /* border-radius: 40px; */
+    border: 1px solid rgba(4, 103, 5, 0.5);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 .hero-identity {
@@ -89,9 +145,15 @@ h1, .brand {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent-dark);
+    color: rgb(255, 255, 140);
     font-weight: 700;
     margin-bottom: 0.75rem;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0,
+        rgba(255, 255, 255, 0.8) 20%,
+        rgb(100, 99, 99)
+    )
 }
 
 .hero-identity h1 {
@@ -100,7 +162,7 @@ h1, .brand {
 }
 
 .bio {
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
     max-width: 480px;
     margin-bottom: 1.5rem;
 }
@@ -151,7 +213,7 @@ h1, .brand {
     position: relative;
 }
 
-.photo-block {
+/* .photo-block {
     position: absolute;
     top: 1.25rem;
     left: 1.25rem;
@@ -160,7 +222,7 @@ h1, .brand {
     background-color: var(--accent);
     border-radius: var(--radius);
     z-index: 0;
-}
+} */
 
 .avatar {
     position: relative;
