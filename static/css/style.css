@@ -127,8 +127,6 @@ h1, .brand {
     gap: 1.5rem 3rem;
     background-color: rgba(9, 62, 71, 0.2);
     backdrop-filter: blur(8px);
-    /* border-radius: 40px; */
-    border: 1px solid rgba(4, 103, 5, 0.5);
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
@@ -140,10 +138,13 @@ h1, .brand {
 
 .description {
     grid-area: description;
+    margin: auto;
+    width: 90%;
 }
 
 .meta-list {
     grid-area: metadetails;
+    margin: auto;
 }
 
 .social-links {
@@ -179,9 +180,9 @@ h1, .brand {
 }
 
 .bio {
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 480px;
-    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 1);
+    max-width: 700px;
+    font-size: 1.2rem;
 }
 
 .meta-list {
@@ -191,7 +192,7 @@ h1, .brand {
 }
 
 .meta-row dt {
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--text-muted);
@@ -204,7 +205,7 @@ h1, .brand {
 
 .social-links {
     display: flex;
-    gap: 0.5rem;
+    gap: 1.8rem;
     flex-wrap: wrap;
 }
 
@@ -218,10 +219,14 @@ h1, .brand {
     border-radius: var(--radius);
     padding: 0.5rem 1.1rem;
     transition: background-color 0.2s ease;
+    margin: auto;
+    transition: all 0.3s ease;
 }
 
 .social-link:hover {
-    background-color: var(--accent);
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero-photo {
@@ -231,7 +236,6 @@ h1, .brand {
     width: 90%;
     margin: auto;
 }
-
 
 .avatar {
     position: relative;
@@ -255,13 +259,15 @@ h1, .brand {
     .hero-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "identity"
+            "kicker"
             "photo"
-            "details";
+            "description"
+            "metadetails"
+            "contacts";
     }
 
     .hero-photo {
-        max-width: 220px;
+        width: 95%;
     }
 
     .social-links {
