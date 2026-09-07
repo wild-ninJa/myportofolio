@@ -5,43 +5,92 @@
 }
 
 :root {
-    --ink: #1c1917;
-    --paper: #faf6f0;
-    --accent: #d95d39;
-    --accent-dark: #a8442a;
-    --line: #e3d9c9;
-    --text-muted: #6b6459;
-    --radius: 4px;
+    --ink: #fcfafa;
+    --paper: #d2dedf;
+    --accent: #2373ec;
+    --accent-dark: #092547;
+    --line: #717d94;
+    --text-muted: #000000;
+    --radius: 24px;
 }
 
 body {
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink);
-    background-color: var(--paper);
+    background-image: url('../img/sunflower-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-height: 100dvh;
     line-height: 1.6;
 }
 
+
+@media (min-width: 768px) {
+    body {
+        background-attachment: fixed;
+    }
+}
+
 h1, .brand {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-family:  "Segoe UI", "Lucida Grande", "Tahoma", "Myriad Pro", "Verdana", sans-serif;
+    letter-spacing: 0.02em;
+    font-size: 10;
 }
 
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto 0;
 }
 
+.page-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
 /* Header dengan Flexbox */
 
 .site-header {
-    border-bottom: 1px solid var(--line);
+    background-color: rgba(4, 31, 36, 0.8);
+    /* background: linear-gradient(
+        to bottom,
+        rgba(0,0,0, 0.8),
+        rgba(248, 250, 252, 0.8) 
+    ); */
+    border-radius: 100px 100px 0 0;
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.site-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    border-radius: 100px 100px 0 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 255, 255, 0) 100%
+    );
 }
 
 .site-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    padding: 3rem 1.5rem;
 }
 
 .brand {
@@ -64,45 +113,76 @@ h1, .brand {
 
 /* Section Hero dengan CSS Grid */
 
-.hero {
+/* .hero {
     padding: 4.5rem 0 5rem;
-}
+} */
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        "identity photo"
-        "details  photo";
+        "kicker kicker"
+        "photo photo"
+        "description description"
+        "metadetails contacts";
     gap: 1.5rem 3rem;
+    background-color: rgba(9, 62, 71, 0.2);
+    backdrop-filter: blur(8px);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero-identity {
-    grid-area: identity;
+    grid-area: kicker;
 }
 
-.hero-details {
-    grid-area: details;
+.description {
+    grid-area: description;
+    margin: auto;
+    width: 90%;
 }
 
-.hero-kicker {
+.meta-list {
+    grid-area: metadetails;
+    margin: auto;
+}
+
+.social-links {
+    grid-area: contacts;
+}
+
+/* .hero-kicker {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent-dark);
+    color: rgb(255, 255, 140);
     font-weight: 700;
     margin-bottom: 0.75rem;
-}
+} */
 
 .hero-identity h1 {
-    font-size: clamp(3rem, 7vw, 5rem);
+    font-size: 1.75rem;
     line-height: 0.95;
 }
 
+.glassy-style {
+    background: linear-gradient(to bottom,#d3dcde 0%, #7a8f99 3%, #455a64 55%, #344852 55%, #1e2d36 98%, #142027 100%);
+    box-shadow: rgba(0,0,0,.3) 0 3px 8px;
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 970px;
+    font-weight: 400;
+    position: relative;
+    padding: 0.8rem;
+}
+
 .bio {
-    color: var(--text-muted);
-    max-width: 480px;
-    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 1);
+    max-width: 700px;
+    font-size: 1.2rem;
 }
 
 .meta-list {
@@ -112,11 +192,12 @@ h1, .brand {
 }
 
 .meta-row dt {
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--text-muted);
     margin-bottom: 0.15rem;
+    font-weight: bold;
 }
 
 .meta-row dd {
@@ -125,52 +206,67 @@ h1, .brand {
 
 .social-links {
     display: flex;
-    gap: 0.5rem;
     flex-wrap: wrap;
 }
 
 .social-link {
     display: inline-block;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: bold;
     text-decoration: none;
-    color: var(--paper);
+    color: rgb(5, 80, 17);
     background-color: var(--ink);
     border-radius: var(--radius);
     padding: 0.5rem 1.1rem;
     transition: background-color 0.2s ease;
+    margin: auto 5px;
+    background: linear-gradient(to bottom,#fffef4 0,#fff3b0 3%,#fdef53 55%,#ffc72d 55%,#ad830e 98%,#3d2d00 100%);
+    transition: all 0.3s ease;
 }
 
 .social-link:hover {
-    background-color: var(--accent);
+    filter: brightness(1.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero-photo {
     grid-area: photo;
     align-self: center;
     position: relative;
-}
-
-.photo-block {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    width: 100%;
-    height: 100%;
-    background-color: var(--accent);
-    border-radius: var(--radius);
-    z-index: 0;
+    width: 90%;
+    margin: auto;
 }
 
 .avatar {
     position: relative;
     z-index: 1;
-    display: block;
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+    height: auto;
+    border: 4.5px solid var(--ink);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+}
+
+/* Section Experience */
+.container.hero-experiences {
+    width: 90%;
+    max-width: 800px;
+}
+
+.experience-list li {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius);
-    border: 3px solid var(--ink);
+    padding: 1rem;
+    list-style: none;
+}
+
+#experiences-heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.75rem;
+    line-height: 0.95;
+    font-weight: bold;
 }
 
 /* Footer & Responsive */
@@ -179,20 +275,43 @@ h1, .brand {
     padding: 1.5rem;
     color: var(--text-muted);
     font-size: 0.85rem;
-    border-top: 1px solid var(--line);
+    background-color: rgba(4, 31, 36, 0.8);
+    border-radius:0 0 50px 50px;
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.site-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 107px;
+    border-radius: 0 0 50px 50px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 70%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
 }
 
 @media (max-width: 600px) {
     .hero-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "identity"
+            "kicker"
             "photo"
-            "details";
+            "description"
+            "metadetails"
+            "contacts";
     }
 
     .hero-photo {
-        max-width: 220px;
+        width: 95%;
     }
 
     .social-links {
