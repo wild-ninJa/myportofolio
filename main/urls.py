@@ -1,6 +1,6 @@
 from django.urls import path
 
-from main.views import show_main, show_experience, show_skill, create_project
+from main.views import *
 
 app_name = "main"
 
@@ -9,4 +9,7 @@ urlpatterns = [
     path("experience/", show_experience, name="show_experience"),
     path("skill/", show_skill, name="show_skill"),
     path("projects/add/", create_project, name="create_project"),
+    path("projects/", show_projects, name="show_projects"),
+    path("api/projects/", get_projects_json, name="get_projects_json"),
+    path("projects/<uuid:project_id>/delete/", delete_project, name="delete_project"), # FIXME
 ]
