@@ -1,6 +1,6 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput
+from django.forms import ModelForm, TextInput, Textarea, URLInput, DateTimeInput, Select
 
-from main.models import Project
+from main.models import Project, Experience
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -50,3 +50,59 @@ class ProjectForm(ModelForm):
                 }
             ),
         }
+        
+class ExperienceForm(ModelForm):
+    class Meta:
+            model = Experience
+            fields = [
+                "title",
+                "description",
+                "category",
+                "thumbnail",
+                "started_at",
+                "ended_at",
+            ]
+    
+            labels = {
+                "title": "Experience title",
+                "description": "Experience description",
+                "category": "Work category",
+                "thumbnail": "Experience image URL",
+                "started_at": "Start date",
+                "ended_at": "End date"
+            }
+    
+            widgets = {
+                "title": TextInput(
+                    attrs={
+                        "placeholder": "CEO of Google",
+                        "maxlength": 255,
+                    }
+                ),
+                "description": TextInput(
+                    attrs={
+                        "placeholder": "what about the experience",
+                        "rows": 3,
+                    }
+                ),
+                "category": Select(
+                    attrs={
+                        "placeholder": "Full-time",
+                    }
+                ),
+                "thumbnail": URLInput(
+                    attrs={
+                        "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                    }
+                ),
+                "started_at": DateTimeInput(
+                    attrs={
+                        "type":"date"
+                    }
+                ),
+                "ended_at": DateTimeInput(
+                    attrs={
+                        "type":"date"
+                    }
+                ),
+            }

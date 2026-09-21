@@ -22,10 +22,18 @@ Class : PBP B
 3. Apa perbedaan fungsi makemigrations dan migrate pada Django? Berikan contoh perubahan model yang mengharuskanmu menjalankan kedua perintah tersebut.
 > Makemigration menciptakan berkas migrasi yang berisi perubahan model yang belum diaplikasikan ke dalam basis data, sedangkan fungsi migrate mengaplikasikan perubahan model yang tercantum dalam berkas migrasi ke basis data dengan menjalankan perintah sebelumnya. Contoh perubahan model adalah saat menambah atribut untuk model Experience untuk menghitung berapa lama experience itu terjadi (contoh sekolah SMA 3 yrs), karena perubahan pada model, contohnya untuk atributnya di sini, maka perlu dilakukan migrasi dengan menjalankan kedua perintah tersebut. 
 
+### Tugas 3
+1. Jelaskan mengapa kita menggunakan ModelForm pada Django alih-alih membuat form HTML secara manual. Selain itu, jelaskan pula mengapa kita diwajibkan menambahkan {% csrf_token %} pada form tersebut!
+> Karena ModelForm pada Django menghindari duplikasi kode (dibanding kalau menggunakan HTML secara manual yang menulis kode berulang kali untuk pgae yang berbeda namun informasi header yang sama), ModelForm juga lebih aman dengan menggunakan CSRF, terintegrasi penuh dengan Admin, CSV, dll. Tujuan dari penggunaan CSRF selain diwajibkan oleh Django dalam pembuatan Form adalah untuk mencegah penyerang aplikasi mengubah request yang awalnya ke server Django kalian menjadi ke suatu API yang berbahaya dan mengirimkan data request kalian ke mereka.
+2. Pada Tutorial 03, kita membahas format data JSON dan XML. Mengapa JSON lebih disukai dalam pengembangan aplikasi web modern dibandingkan XML?
+> JSON lebih disukai dibandingkan XML pada aplikasi web modern karena ukurannya yang lebih ringkas, parser yang sangat cepat, dan integrasi yang sangat natural dengan JavaScript di sisi frontend.
+3. Jelaskan alur yang terjadi saat kamu menggunakan fungsi view untuk mengembalikan data portofoliomu dalam bentuk JSON. Mengapa kita perlu melakukan proses serialization pada model Django sebelum datanya dikembalikan?
+> Saat view mengembalikan JSON, Django menerima request, mencocokkan URL ke view, mengambil data lewat ORM sebagai objek Python, menserialisasikannya menjadi string JSON, lalu mengirimnya sebagai HttpResponse dengan header application/json. Serialization diperlukan karena objek model dan QuerySet bukan tipe yang dikenali JSON dan tidak bisa dikirim lewat HTTP, banyak tipe data Python harus dikonversi, dan proses ini memberi Anda kendali atas field yang diekspos serta struktur data yang diterima client.
+
 AI disclosure
 
 Log Tugas 1: https://claude.ai/share/fa8b1141-3df1-49ec-a123-7094f922c4a2
-Log Tugas 2: https://claude.ai/share/b93d0e6a-b70c-4c36-b220-0f8e8b6e1a1a
+Log Tugas 2 & 3: https://claude.ai/share/b93d0e6a-b70c-4c36-b220-0f8e8b6e1a1a
 
 
 Saya belajar banyak hal dari Claude, mulai dari fungsi dan penjelasan dari seluruh elemen-elemen yang ada dari hasil tutorial 1, sampai ke tahap-tahap selanjutnya untuk memenuhi keinginan saya untuk mengganti pengaturan CSS sesuai dengan keinginan saya. Saya meminta Claude untuk menuntun saya secara bertahap dan respons dari Generative AI tersebut kebanyakan menyuruh saya untuk bereksperimen sendiri lalu menjelaskan hasilnya. Dari situ, banyak yang saya pelajari serta bagaimana selanjutnya saya bisa mengatur tampilan tanpa tuntunan Claude lagi, yang mana sudah terjadi sebagaimana Claude itu sendiri tidak mengetahui apa yang berada di kepala saya, saya mulai mengganti secara manual pada design yang menurut saya kurang memnuhi kepuasan saya, saya jadi belajar mengerti isi dari inspection web-web lain secara mandiri sehingga saya dapat belajar dari hal tersebut dibanding sepenuhnya AI.

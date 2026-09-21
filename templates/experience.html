@@ -1,38 +1,59 @@
 {% extends "base.html" %}
 {% block meta %}
-    <title>Experiences - {{ name }}</title>
+    <title>Experience - {{ name }}</title>
 {% endblock meta %}
 {% block content %}
-<main class="page-container">
+    <main>
         <section class="experience-section" id="experience">
-        <div class="container">
-            <p class="section-kicker">Perjalanan saya sejauh ini</p>
-            <h1>Experience</h1>
-
-            <div class="experience-grid">
-                {% for experience in experience_list %}
-                    <article class="experience-card">
-                        <span class="experience-category">
-                            {{ experience.get_category_display }}
-                        </span>
-                        <h2>{{ experience.title }}</h2>
-                        <p class="experience-description">
-                            {{ experience.description }}
-                        </p>
-
-                        {% if experience.is_ongoing %}
+            <div class="container">
+                <p class="section-kicker">My journey so far...</p>
+                <div class="experience-header">
+                    <h1>Experience</h1>
+                    <a href="{% url 'main:create_experience' %}"
+                       class="button project-add-button">
+                        <span aria-hidden="true">+</span>
+                        Add experience
+                    </a>
+                </div>
+                <form method="get"
+                      action="{% url 'main:show_experience' %}"
+                      class="project-search">
+                    <input type="search"
+                           name="title"
+                           value="{{ title_query }}"
+                           placeholder="Search by experience name"
+                           class="project-search__input"
+                           aria-label="Cari berdasarkan nama pengalaman">
+                    <button type="submit" class="button">Cari</button>
+                </form>
+                <div class="experience-grid project-grid">
+                    {% for experience in experience_list %}
+                        <article class="experience-card">
+                            {% if project.project_image_url %}
+                                <img src="{{ experience.thumbnail }}"
+                                     alt="Gambar {{ experience.title }}"
+                                     class="project-image">
+                            {% endif %}
+                            <h2>{{ experience.title }}</h2>
+                            <span class="experience-category">{{ experience.category }}</span>
+                            <p class="experience-description">{{ experience.description }}</p>
+                            {% if experience.is_ongoing %}
                             <p class="experience-status">Sedang berlangsung</p>
-                        {% else %}
+                            {% else %}
                             <p class="experience-status">Selesai</p>
+                            {% endif %}
+                            <a href="{% url 'main:edit_experience' experience.id %}" class="button">Edit</a>
+                            {% include "components/experience_delete_modal.html" with experience=experience %}
+                        </article>
+                    {% empty %}
+                        {% if title_query %}
+                            <p class="empty-state">Tidak ada pengalaman dengan nama tersebut.</p>
+                        {% else %}
+                            <p class="empty-state">Belum ada pengalaman yang ditambahkan.</p>
                         {% endif %}
-                    </article>
-                {% empty %}
-                    <p class="empty-state">
-                        Belum ada pengalaman yang ditambahkan.
-                    </p>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 {% endblock content %}

@@ -12,6 +12,7 @@
                     <a href="{% url 'main:create_project' %}"
                        class="button project-add-button">
                         <span aria-hidden="true">+</span>
+                        
                         Tambah Proyek
                     </a>
                 </div>
@@ -42,6 +43,7 @@
                                     {% if project.project_url %}
                                         <a href="{{ project.project_url }}" class="button">Lihat Project</a>
                                     {% endif %}
+                                    <a href="{% url 'main:edit_project' project.id %}" class="button">Edit</a>
                                     {% include "components/project_delete_modal.html" with project=project %}
                                 </div>
                             </div>
