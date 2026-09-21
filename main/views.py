@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from main.forms import ProjectForm
+from main.forms import ProjectForm, ExperienceForm
 
 
 def show_main(request):
@@ -19,13 +19,60 @@ def show_main(request):
     }
     return render(request, "index.html", context)
 
+# Experience area
 
-def show_experience(request):
+def create_experience(request):
+    form = ExperienceForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "New Experience added!")
+        return redirect("main:show_experience")
+
     context = {
         "name": "Husainah Syamsiah",
-        "experience_list": Experience.objects.all(),
+        "form": form,
     }
-    return render(request, "experience.html", context)
+    return render(request, "experience_form.html", context)
+
+def show_experience(request):
+    json_response = get_experiences_json(request)
+
+    experiences = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    experiences = [experience.object for experience in experiences]
+    title_query = request.GET.get("title", "").strip()
+
+    context = {
+        "name": "Husainah Syamsiah",
+        "experience_list": experiences,
+        "title_query": title_query,
+    }
+    return render(request, "experience.html", context) # TODO: MAKE EXPERIENCE.HTML
+
+def get_experiences_json(request):
+    title_query = request.GET.get("title", "").strip()
+    experiences = Experience.objects.all()
+
+    if title_query:
+        experiences = experiences.filter(title__icontains=title_query)
+
+    experiences_json = serializers.serialize("json", experiences)
+    return HttpResponse(experiences_json, content_type="application/json")
+
+def delete_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        experience.delete()
+        messages.success(request, "Experience deleted!")
+        return redirect("main:show_experience")
+
+    return redirect("main:show_experience")
+
+# Skill area
 
 def show_skill(request):
     context = {
@@ -33,6 +80,8 @@ def show_skill(request):
         "skill_list": Skill.objects.all(),
     }
     return render(request, "skill.html", context)
+
+# Projects area
 
 def create_project(request):
     form = ProjectForm(request.POST or None)
@@ -43,7 +92,7 @@ def create_project(request):
         return redirect("main:show_projects")
 
     context = {
-        "name": "Burhan",
+        "name": "Husainah Syamsiah",
         "form": form,
     }
     return render(request, "projects_form.html", context)
