@@ -72,6 +72,22 @@ def delete_experience(request, experience_id):
 
     return redirect("main:show_experience")
 
+def edit_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+    form = ExperienceForm(request.POST or None, instance=experience)
+    
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Experience updated!")
+        return redirect("main:show_experience")
+    
+    context = {
+        "name": "Husainah Syamsiah",
+        "form": form,
+        "experience": experience,
+    }
+    return render(request, "experience_form.html", context)
+
 # Skill area
 
 def show_skill(request):
@@ -133,3 +149,19 @@ def delete_project(request, project_id):
         return redirect("main:show_projects")
 
     return redirect("main:show_projects")
+
+def edit_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    form = ProjectForm(request.POST or None, instance=project)
+    
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Project is successfully updated!!")
+        return redirect("main:show_projects")
+    
+    context = {
+        "name": "Husainah Syamsiah",
+        "form": form,
+        "project": project,
+    }
+    return render(request, "projects_form.html", context)
