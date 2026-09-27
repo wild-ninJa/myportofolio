@@ -9,11 +9,13 @@
                 <p class="section-kicker">My journey so far...</p>
                 <div class="experience-header">
                     <h1>Experience</h1>
-                    <a href="{% url 'main:create_experience' %}"
-                       class="button project-add-button">
-                        <span aria-hidden="true">+</span>
-                        Add experience
-                    </a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'main:create_experience' %}"
+                        class="button project-add-button">
+                            <span aria-hidden="true">+</span>
+                            Add experience
+                        </a>
+                    {% endif %}
                 </div>
                 <form method="get"
                       action="{% url 'main:show_experience' %}"
@@ -42,8 +44,11 @@
                             {% else %}
                             <p class="experience-status">Selesai</p>
                             {% endif %}
-                            <a href="{% url 'main:edit_experience' experience.id %}" class="button">Edit</a>
-                            {% include "components/experience_delete_modal.html" with experience=experience %}
+                            {% include "components/experience_star.html" with experience=experience %}
+                            {% if user.is_superuser %}
+                                <a href="{% url 'main:edit_experience' experience.id %}" class="button">Edit</a>
+                                {% include "components/experience_delete_modal.html" with experience=experience %}
+                            {% endif %}
                         </article>
                     {% empty %}
                         {% if title_query %}
