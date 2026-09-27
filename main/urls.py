@@ -17,4 +17,7 @@ urlpatterns = [
     path("api/experience/", get_experiences_json, name="get_experiences_json"),
     path("experience/<uuid:experience_id>/delete/", delete_experience, name="delete_experience"),
     path("experience/<uuid:experience_id>/edit/", edit_experience, name="edit_experience"),
+    path("register/", register, name="register"),
+    path("login/", login_user, name="login"),
+    path("logout/", logout_user, name="logout"),
 ]
