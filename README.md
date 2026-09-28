@@ -30,6 +30,9 @@ Class : PBP B
 3. Jelaskan alur yang terjadi saat kamu menggunakan fungsi view untuk mengembalikan data portofoliomu dalam bentuk JSON. Mengapa kita perlu melakukan proses serialization pada model Django sebelum datanya dikembalikan?
 > Saat view mengembalikan JSON, Django menerima request, mencocokkan URL ke view, mengambil data lewat ORM sebagai objek Python, menserialisasikannya menjadi string JSON, lalu mengirimnya sebagai HttpResponse dengan header application/json. Serialization diperlukan karena objek model dan QuerySet bukan tipe yang dikenali JSON dan tidak bisa dikirim lewat HTTP, banyak tipe data Python harus dikonversi, dan proses ini memberi Anda kendali atas field yang diekspos serta struktur data yang diterima client.
 
+### Tugas 4
+Saya menggunakan AI untuk memberi pemahaman atas kesalahpahaman saya terhadap bagaimana kerjanya session dan cookies. Saya juga memintanya untuk menjelaskan bagaimana proses membuat group Editor dan aproach yang bisa diambil. Saya memodifikasikan sendiri sesuai dengan yang diminta pada Tugas 4 agar Editor hanya bisa meng-edit. Saya juga meminta AI untuk debug error yang sudah saya coba men-debug sendiri tetapi kurang teliti.
+
 AI disclosure
 
 Log Tugas 1: https://claude.ai/share/fa8b1141-3df1-49ec-a123-7094f922c4a2
