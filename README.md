@@ -31,12 +31,30 @@ Class : PBP B
 > Saat view mengembalikan JSON, Django menerima request, mencocokkan URL ke view, mengambil data lewat ORM sebagai objek Python, menserialisasikannya menjadi string JSON, lalu mengirimnya sebagai HttpResponse dengan header application/json. Serialization diperlukan karena objek model dan QuerySet bukan tipe yang dikenali JSON dan tidak bisa dikirim lewat HTTP, banyak tipe data Python harus dikonversi, dan proses ini memberi Anda kendali atas field yang diekspos serta struktur data yang diterima client.
 
 ### Tugas 4
+AI Disclosure Tugas 4:
 Saya menggunakan AI untuk memberi pemahaman atas kesalahpahaman saya terhadap bagaimana kerjanya session dan cookies. Saya juga memintanya untuk menjelaskan bagaimana proses membuat group Editor dan aproach yang bisa diambil. Saya memodifikasikan sendiri sesuai dengan yang diminta pada Tugas 4 agar Editor hanya bisa meng-edit. Saya juga meminta AI untuk debug error yang sudah saya coba men-debug sendiri tetapi kurang teliti.
 
-AI disclosure
+### Tugas 5
+1. Jelaskan apa itu debouncing dan mengapa teknik ini penting diterapkan pada fitur pencarian yang menggunakan AJAX!
+> Debouncing adalah teknik untuk menunda sebuah fungsi hingga suatu jeda waktu berlalu tanpa event baru. Selama pengguna masih mengetik, timer sebelumnya dibatalkan dan dimulai lagi. Dengan demikian, browser hanya mengirim permintaan setelah pengguna berhenti mengetik selama sejenak.Teknik ini penting untuk fitur pencarian yang menggunakan AJAX karena otherwise pencarian akan diproses setiap karakter, yang mengakibatkan load server berkali-kali.
+
+2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+> await adalah keyword yang hanya bisa digunakan di dalam async function dan berfungsi untuk “menunggu” Promise selesai diproses sebelum melanjutkan ke baris kode berikutnya. Tanpa await, sebuah Promise akan tetap berjalan di belakang layar dan kode berikutnya akan langsung dieksekusi tanpa menunggu hasilnya.
+
+3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
+> serangan Cross-Site Scripting (XSS) adalah serangan ketika penyerang berhasil menyisipkan kode JavaScript miliknya ke dalam halaman web yang kemudian dijalankan di browser pengguna lain, contohnya jika kode berbahaya disimpan pada database lalu ikut dijalankan setiap kali data tersebut ditampilkan.
+> Karena pada template Django, dilakikan auto-escaping pada setiap { variabel }. Karakter seperti < dan > diubah menjadi &lt; dan &gt; sehingga browser menampilkannya sebagai teks biasa, bukan sebagai tag HTML. Perlindungan itu hilang ketika kita pindah ke AJAX. Pada buildProjectCardElement, data dari JSON disisipkan ke dalam template literal lalu dipasang lewat innerHTML. Tidak ada lagi Django yang melakukan escaping sehingga browser akan memperlakukan setiap tag HTML di dalam data sebagai kode sungguhan.
+
+AI disclosure Tugas 5:
+Pada Tugas 5, AI saya gunakan untuk membantu debugging terkait logical error yang saya alami. Saya juga menanya mengenai konsep yang kurang saya mengerti.
+
+---
+
+__AI disclosure keseluruhan__
 
 Log Tugas 1: https://claude.ai/share/fa8b1141-3df1-49ec-a123-7094f922c4a2
-Log Tugas 2 dan seterusnya: https://claude.ai/share/b93d0e6a-b70c-4c36-b220-0f8e8b6e1a1a
+Log Tugas 2, 3, 4: https://claude.ai/share/b93d0e6a-b70c-4c36-b220-0f8e8b6e1a1a
+Log Tugas 5: https://claude.ai/share/05e8dc02-0f93-4fd2-b956-8333c90ae748
 
 
 Saya belajar banyak hal dari Claude, mulai dari fungsi dan penjelasan dari seluruh elemen-elemen yang ada dari hasil tutorial 1, sampai ke tahap-tahap selanjutnya untuk memenuhi keinginan saya untuk mengganti pengaturan CSS sesuai dengan keinginan saya. Saya meminta Claude untuk menuntun saya secara bertahap dan respons dari Generative AI tersebut kebanyakan menyuruh saya untuk bereksperimen sendiri lalu menjelaskan hasilnya. Dari situ, banyak yang saya pelajari serta bagaimana selanjutnya saya bisa mengatur tampilan tanpa tuntunan Claude lagi, yang mana sudah terjadi sebagaimana Claude itu sendiri tidak mengetahui apa yang berada di kepala saya, saya mulai mengganti secara manual pada design yang menurut saya kurang memnuhi kepuasan saya, saya jadi belajar mengerti isi dari inspection web-web lain secara mandiri sehingga saya dapat belajar dari hal tersebut dibanding sepenuhnya AI.
