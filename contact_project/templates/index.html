@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.11/dist/htmx.min.js" 
+          integrity="sha384-2OatzQy1H+Zd/IIrjr1TcuDGqLXeHhbooAyJY1KdQMKnr4LZ22k31GBLdYKHmVjg"
+          crossorigin="anonymous">
+    </script>
+    
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <header class="site-header">
+        <div class="container">
+            <a  class="brand">Django + HTMX</a>
+        </div>
+    </header>
+
+    <main>
+
+         <h1>Tambah Kontak</h1>
+
+        <form hx-post="{% url 'main:contact_add' %}"
+            hx-target="#contact-rows"
+            hx-swap="innerHTML"
+            hx-on::after-request="if (event.detail.successful) this.reset()">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Nama" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Tambah</button>
+        </form>
+
+        <h1>Daftar Kontak</h1>
+
+        <!-- LIVE SEARCH -->
+        <input type="search" name="q" placeholder="Cari kontak..."
+            hx-get="{% url 'main:contact_search' %}"
+            hx-trigger="keyup changed delay:300ms, search"
+            hx-target="#contact-rows"
+            hx-indicator="#search-indicator">
+        <span id="search-indicator" class="htmx-indicator">Mencari...</span>
+
+
+        <table>
+        <thead><tr><th>Nama</th><th>Email</th><th></th></tr></thead>
+        <tbody id="contact-rows">
+            {% include "_contact_rows.html" %}
+        </tbody>
+        </table>
+    </main>
+
+    <div id="form-feedback"></div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Burhan. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+        </div>
+    </footer>
+</body>
+
+
+</html>
