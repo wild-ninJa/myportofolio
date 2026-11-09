@@ -56,6 +56,16 @@ class ExperienceSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id"]
 
+    def validate(self, attrs):
+            started_at = attrs.get("started_at", getattr(self.instance, "started_at", None))
+            ended_at = attrs.get("ended_at", getattr(self.instance, "ended_at", None))
+    
+            if started_at and ended_at and ended_at < started_at:
+                raise serializers.ValidationError(
+                    {"ended_at": "End date cannot be earlier than start date."}
+                )
+            return attrs
+        
     def validate_title(self, value):
         value = strip_tags(value).strip()
         if not value:

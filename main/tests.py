@@ -76,7 +76,7 @@ class MainTest(TestCase):
         Experience.objects.all().delete()
         response = self.client.get(reverse("main:show_experience"))
 
-        self.assertContains(response, "Belum ada pengalaman yang ditambahkan.")
+        self.assertContains(response, "Belum ada experience yang ditambahkan atau ditemukan.")
 
     def test_empty_skill_page(self):
             Skill.objects.all().delete()
