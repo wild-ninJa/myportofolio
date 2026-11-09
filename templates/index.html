@@ -42,9 +42,9 @@
             <details>
                 <summary class="glassy-style" id="experiences-heading">Experiences</summary>
                 <ul class="experience-list">
-                    <li>CEO perusahaan Cybersecurity terbesar di dunia</li>
-                    <li>Pernah nolak invitation Elon Musk untuk kerjasama</li>
-                    <li>Penyelamat bumi tahun 2029</li>
+                    {% for exp in experiences|dictsortreversed:"date"|slice:":3" %}
+                    <li>{{ exp.title }}</li>
+                    {% endfor %}
                 </ul>
             </details>
         </div>

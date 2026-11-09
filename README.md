@@ -48,6 +48,28 @@ Saya menggunakan AI untuk memberi pemahaman atas kesalahpahaman saya terhadap ba
 AI disclosure Tugas 5:
 Pada Tugas 5, AI saya gunakan untuk membantu debugging terkait logical error yang saya alami. Saya juga menanya mengenai konsep yang kurang saya mengerti.
 
+### Tugas 6
+1. Jelaskan apa yang dimaksud dengan REST dan mengapa mengembalikan JSON saja belum cukup untuk menyebut sebuah API sebagai RESTful! Jelaskan pula perbedaan PUT dan PATCH beserta contoh kapan masing-masing sebaiknya digunakan!
+> REST (Representational State Transfer) adalah gaya arsitektur untuk merancang web API, bukan library atau format data. Karena itu, API yang mengembalikan JSON belum tentu RESTful. Yang menentukan adalah cara API tersebut diatur.
+> PUT mengirim representasi pengganti, dengan seluruh field wajib. Sedangkan, PATCH mengirim hanya field yang ingin diubah.
+> contoh, PUT digunakan saat ingin melakukan full update.
+> contoh, PATCH digunakan saat ingin melakukan update sebagian pada suatu resource.
+
+2. Jelaskan peran serializer pada Django REST Framework! Apa keuntungannya dibandingkan merakit dictionary secara manual dengan JsonResponse seperti pada Tutorial 05?
+> Pada Django REST Framework (DRF), Serializer berperan sebagai jembatan utama yang bertugas mengubah data kompleks (seperti instance model Django atau QuerySet) menjadi format data terstruktur yang dapat ditransmisikan (biasanya JSON atau XML), serta proses sebaliknya.
+> Menggunakan Serializer jauh lebih menguntungkan karena semua pekerjaan berat dilakukan otomatis, kita tidak perlu lagi menulis kode manual untuk mengecek validasi data, membaca input JSON, atau menyusun format *error*. Cukup dengan satu baris kode .is_valid(), Serializer otomatis memastikan data aman sebelum disimpan, membuat kode yang ringkas, rapih, dan minim kesalahan penulisan.
+
+3. Jelaskan perbedaan autentikasi dan otorisasi pada Django REST Framework! Mengapa hak akses harus diperiksa dengan permission class di server, bukan hanya dengan menyembunyikan tombol di template?
+> Autentikasi menjawab siapa kamu, sedangkan otorisasi menjawab apa yang boleh kamu lakukan. Di DRF, keduanya dipisahkan menjadi authentication class mengisi request.user, lalu permission class memutuskan apakah request boleh diteruskan.
+> Hak akses wajib diperiksa di server menggunakan Permission Class karena menyembunyikan tombol di frontend hanyalah penyesuaian UI, bukan proteksi keamanan—pengguna dapat dengan mudah memunculkan kembali tombol tersebut melalui Developer Tools atau mengirim request HTTP langsung ke endpoint API tanpa melalui web interface sama sekali.
+
+4. Jelaskan mengapa permintaan yang mengubah data tetap memerlukan token CSRF ketika API memakai SessionAuthentication! Mengapa test yang memakai force_authenticate tidak cukup untuk membuktikan bahwa perlindungan CSRF berjalan?
+> Saat menggunakan SessionAuthentication, browser akan mengirimkan cookie sesi secara otomatis pada setiap request ke domain yang sama, termasuk permintaan dari situs jahat (Cross-Site Request Forgery / CSRF). Oleh karena itu, token CSRF tetap wajib diperlukan pada request pengubah data (POST, PUT, DELETE) untuk membuktikan bahwa permintaan tersebut benar-benar berasal dari interface aplikasi kita, bukan hasil bajakan dari situs luar yang memanfaatkan cookie sesi pengguna yang sedang aktif.
+> Pengujian yang hanya mengandalkan force_authenticate tidak cukup untuk membuktikan perlindungan CSRF berjalan karena metode tersebut bekerja dengan cara me-bypass (bypass) seluruh mekanisme autentikasi dan middleware Django, termasuk pemeriksaan cookie dan token csrf. Dengan langsung memasangkan objek pengguna (request.user) ke dalam request uji. Akibatnya, pengujian dengan force_authenticate selalu lolos meskipun server sebenarnya tidak memasang perlindungan CSRF sama sekali. Untuk menguji proteksi CSRF secara valid, pengujian harus menggunakan klien HTTP bawaan (APIClient) dengan pengiriman header atau cookie CSRF secara nyata tanpa me-bypass lapisan keamanan server.
+AI disclosure Tugas 5:
+> Saya menggunakan AI untuk membantu saya memahami hal-hal yang masih belum saya mengerti, serta menuntun saya mengerjakan tugas 5. Saya juga menggunakannya untuk rujukan testings, dan teman debugging. Beberapa hal yang disugesti olehnya saya ganti beberapa sesuai selera saya.
+
+
 ---
 
 __AI disclosure keseluruhan__
@@ -55,6 +77,6 @@ __AI disclosure keseluruhan__
 Log Tugas 1: https://claude.ai/share/fa8b1141-3df1-49ec-a123-7094f922c4a2
 Log Tugas 2, 3, 4: https://claude.ai/share/b93d0e6a-b70c-4c36-b220-0f8e8b6e1a1a
 Log Tugas 5: https://claude.ai/share/05e8dc02-0f93-4fd2-b956-8333c90ae748
-
+Log Tugas 6: https://claude.ai/share/7ca118bf-f51a-4da0-ae21-604b81097717
 
 Saya belajar banyak hal dari Claude, mulai dari fungsi dan penjelasan dari seluruh elemen-elemen yang ada dari hasil tutorial 1, sampai ke tahap-tahap selanjutnya untuk memenuhi keinginan saya untuk mengganti pengaturan CSS sesuai dengan keinginan saya. Saya meminta Claude untuk menuntun saya secara bertahap dan respons dari Generative AI tersebut kebanyakan menyuruh saya untuk bereksperimen sendiri lalu menjelaskan hasilnya. Dari situ, banyak yang saya pelajari serta bagaimana selanjutnya saya bisa mengatur tampilan tanpa tuntunan Claude lagi, yang mana sudah terjadi sebagaimana Claude itu sendiri tidak mengetahui apa yang berada di kepala saya, saya mulai mengganti secara manual pada design yang menurut saya kurang memnuhi kepuasan saya, saya jadi belajar mengerti isi dari inspection web-web lain secara mandiri sehingga saya dapat belajar dari hal tersebut dibanding sepenuhnya AI.
