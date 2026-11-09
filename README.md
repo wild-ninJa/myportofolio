@@ -66,6 +66,10 @@ Pada Tugas 5, AI saya gunakan untuk membantu debugging terkait logical error yan
 4. Jelaskan mengapa permintaan yang mengubah data tetap memerlukan token CSRF ketika API memakai SessionAuthentication! Mengapa test yang memakai force_authenticate tidak cukup untuk membuktikan bahwa perlindungan CSRF berjalan?
 > Saat menggunakan SessionAuthentication, browser akan mengirimkan cookie sesi secara otomatis pada setiap request ke domain yang sama, termasuk permintaan dari situs jahat (Cross-Site Request Forgery / CSRF). Oleh karena itu, token CSRF tetap wajib diperlukan pada request pengubah data (POST, PUT, DELETE) untuk membuktikan bahwa permintaan tersebut benar-benar berasal dari interface aplikasi kita, bukan hasil bajakan dari situs luar yang memanfaatkan cookie sesi pengguna yang sedang aktif.
 > Pengujian yang hanya mengandalkan force_authenticate tidak cukup untuk membuktikan perlindungan CSRF berjalan karena metode tersebut bekerja dengan cara me-bypass (bypass) seluruh mekanisme autentikasi dan middleware Django, termasuk pemeriksaan cookie dan token csrf. Dengan langsung memasangkan objek pengguna (request.user) ke dalam request uji. Akibatnya, pengujian dengan force_authenticate selalu lolos meskipun server sebenarnya tidak memasang perlindungan CSRF sama sekali. Untuk menguji proteksi CSRF secara valid, pengujian harus menggunakan klien HTTP bawaan (APIClient) dengan pengiriman header atau cookie CSRF secara nyata tanpa me-bypass lapisan keamanan server.
+AI disclosure Tugas 5:
+> Saya menggunakan AI untuk membantu saya memahami hal-hal yang masih belum saya mengerti, serta menuntun saya mengerjakan tugas 5. Saya juga menggunakannya untuk rujukan testings, dan teman debugging. Beberapa hal yang disugesti olehnya saya ganti beberapa sesuai selera saya.
+
+
 ---
 
 __AI disclosure keseluruhan__
